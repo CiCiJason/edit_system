@@ -1,0 +1,34 @@
+<div>
+    <header class="clearfloat">
+
+        <ul class="clearfloat">
+            <li>
+                <a href="" ui-sref="index.info">用户信息</a>
+            </li>
+            <li>
+                <a href="" ui-sref="index.input">录入文档</a>
+            </li>
+            <li>
+                <a href="" ui-sref="index.modify">修改文档</a>
+            </li>
+
+
+            {{#if admin}}
+            <li>
+                <a href="" ui-sref="index.add">添加管理员</a>
+            </li>
+            {{/if}}
+
+            <li>
+                <a href="" ui-sref="index.repassword">修改密码</a>
+            </li>
+            <li>
+                <a href="" ui-sref="logout">退出系统</a>
+            </li>
+        </ul>
+    </header>
+
+
+    <div ui-view></div>
+
+</div>

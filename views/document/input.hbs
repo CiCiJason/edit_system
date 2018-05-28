@@ -1,0 +1,167 @@
+<div class="input">
+
+    {{!-- 保存文档提示 --}} {{!--
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".save_tip">Small modal</button> --}}
+
+    <div class="modal fade save_tip" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <h2>[[save_tip]]</h2>
+            </div>
+        </div>
+    </div>
+
+    {{!-- 预览编辑的文档 --}}
+    <div class="modal fade document_preview" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <div class="modal_show_doc">
+                                <h1 class="modal_title">
+                                    [[document.title]]
+                                </h1>
+                                <h3 class="modal_subtitle">
+                                    [[document.subtitle]]
+                                </h3>
+                                <p class="modal_time">
+                                    [[document.time]]
+                                </p>
+                                <hr>
+                                <div class="content">
+                                    <div froala-view="document.content"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="">
+        <h3 class="subtit">录入文档</h3>
+        <br>
+
+        <div class="container">
+            <form action="" method="POST" role="form">
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label for="">文档类型</label>
+                        </div>
+
+                        <div class="col-md-3">
+                            <select name="type" id="type" class="form-control" required="required" ng-model="document.type">
+                                <option value="新闻事件">新闻事件</option>
+                                <option value="通知公告">通知公告</option>
+                                <option value="应用案例">应用案例</option>
+                                <option value="获奖情况">获奖情况</option>
+                                <option value="论文发表">论文发表</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label for="title">文档标题</label>
+                        </div>
+
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" name="title" id='title' placeholder="请输入文档标题" ng-model='document.title' />
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label for="subtitle">文档副标题</label>
+                        </div>
+
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" name="subtitle" id='subtitle' placeholder="如果有副标题，请输入文档副标题" ng-model='document.subtitle'
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label for="time">发布时间</label>
+                        </div>
+                        <div class="col-md-3">
+                            <input type="date" name="time" id="time" class="form-control" required="required" ng-model='document.time'>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label for="">文档正文：</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="editor">
+                    <textarea id="froala-sample" froala="inputOptions" ng-model="document.content"></textarea>
+                </div>
+
+                <div class="container">
+                    <div class="col-md-offset-2 col-md-8">
+                        <p class="tip">[[tip]]</p>
+                    </div>
+                </div>
+
+
+
+
+            </form>
+
+
+        </div>
+
+    </div>
+
+    <div class="doc_submit">
+        <button type="button" class="btn btn-lg btn-info " data-toggle="modal" data-target=".document_preview" ng-click="preview()">预览</button>
+
+        <button type="button" class="btn btn-lg btn-primary" ng-click="submit(false)">提交</button>
+
+        <button type="button" class="btn btn-lg btn-warning" ng-click="submit(true)">保存</button>
+
+    </div>
+
+    <h3 class="subtit">页面展示效果如下：</h3>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+                <div class="modal_show_doc">
+                    <h1 class="modal_title">
+                        [[document.title]]
+                    </h1>
+                    <h3 class="modal_subtitle">
+                        [[document.subtitle]]
+                    </h3>
+                    <p class="modal_time">
+                        [[document.time|date:'yyyy-MM-dd']]
+                    </p>
+                    <hr>
+                    <div class="content">
+                        <div froala-view="document.content"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

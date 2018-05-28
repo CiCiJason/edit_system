@@ -1,0 +1,64 @@
+<header>
+    <h1>欢迎登录扬子云计算中心编辑平台</h1>
+</header>
+
+
+<div class="container">
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h1 class="panel-title">管理员登录</h1>
+        </div>
+        <div class="panel-body">
+
+
+            <form role="form" name='loginForm' novalidate ng-submit='loginSubmit()'>
+                <div class="form-group">
+
+                    <div class="form-group">
+                        <div class="row">
+                            <label for="username" class="col-xs-4 col-sm-offset-1 col-sm-2 control-label">用户</label>
+                            <div class="col-xs-8 col-sm-6">
+                                <input type="text" class="form-control" name="username" id="username" ng-model='user.username' placeholder="请输入用户名" required/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="row">
+                        <label for="username" class="col-xs-4 col-sm-offset-1 col-sm-2 control-label">密码</label>
+                        <div class="col-xs-8 col-sm-6">
+
+                            {{!--
+                            <input type="password" class="form-control" name="password" ng-model='user.password' placeholder="请输入6-20位密码"
+                                ng-minlength='6' ng-maxlength='20' required/> --}}
+                            <input type="password" class="form-control" name="password" id="password" ng-model='user.password' placeholder="请输入6-20位密码" required/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div style="color:red" class="col-sm-offset-3 col-sm-8">
+                        <b class="notice">[[resultmsg]]</b>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="row login">
+                        <div class="col-sm-offset-3 col-sm-6">
+                            <input type="submit" class=" btn btn-primary" id="login" value="登录" />
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+
+        </div>
+    </div>
+
+</div>
+
+<script src="/javascripts/login.js"></script>
