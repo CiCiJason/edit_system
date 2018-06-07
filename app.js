@@ -36,7 +36,7 @@ app.use(session({
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-app.all('/*', [apiAuth]);
+//app.all('/*', [apiAuth]);
 
 routes(app);
 

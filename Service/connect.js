@@ -12,11 +12,11 @@ module.exports = {
         if (method == 'POST') {
             request({
                     method: method,
-                    url: serverName.serverName + '/api' + url + '.php',
-                    // url: serverName.serverName + '/api' + url,
-                    // 'content-type': 'application/json',
-                    // json: data
-                    form: data
+                    // url: serverName.serverName + '/api' + url + '.php',
+                    url: serverName.serverName + '/api' + url,
+
+                    form: data,
+                    json: true
                 },
                 function(error, response, body) {
                     //var bodyjson = JSON.parse(body);
@@ -30,15 +30,15 @@ module.exports = {
                     callback(body);
 
                 })
-        }
+        } 
         if (method == 'GET') {
             request({
                     method: method,
-                    url: serverName.serverName + '/api' + url + '.php',
-                    // url: serverName.serverName + '/api' + url,
+                    // url: serverName.serverName + '/api' + url + '.php',
+                    url: serverName.serverName + '/api' + url,
 
-                    'content-type': 'application/json',
-                    json: data
+                    qs: data,
+                    json: true
                 },
                 function(error, response, body) {
                     //var bodyjson = JSON.parse(body);
@@ -47,7 +47,7 @@ module.exports = {
                         callback({ 'error': "error" });
                     }
 
-                    callback(body);
+                    callback(body); 
 
                 })
         }
