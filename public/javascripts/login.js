@@ -1,9 +1,4 @@
- //先查看是否有本地数据（记住密码）  
-
-
- // 登录验证
-
- $(function() {
+$(function() {
      function loginAuth() {
          var username = $("#username").val();
          var password = $("#password").val();
@@ -14,7 +9,7 @@
 
              $.ajax({
                  type: "POST",
-                 url: '/login/verify',
+                 url: '/user/login',
                  data: {
                      username: username,
                      password: md5(password)

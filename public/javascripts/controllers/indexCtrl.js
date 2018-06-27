@@ -23,7 +23,7 @@ app.controller('indexCtrl', ['$scope', '$http', '$window', '$location', function
         );
     }
 
-    init();
+    // init();
 
 
     //编辑草稿箱中的一篇文章

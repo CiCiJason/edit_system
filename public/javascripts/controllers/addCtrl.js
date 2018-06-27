@@ -5,12 +5,13 @@ app.controller('addCtrl', ['$scope', '$http', '$window', '$location', function($
     //做分页处理
 
     $scope.user = {};
+    $scope.err_tip='';
 
 
     function init() {
         $http({
             method: 'GET',
-            url: '/users/read'
+            url: '/user/list'
         }).then(
             function success(data) {
                 $scope.users = data.data;
@@ -21,7 +22,7 @@ app.controller('addCtrl', ['$scope', '$http', '$window', '$location', function($
         );
     }
 
-    //init();
+    init();
 
 
     //编辑用户信息
@@ -32,33 +33,53 @@ app.controller('addCtrl', ['$scope', '$http', '$window', '$location', function($
     }
 
 
-    //保存信息去数据库
+    //添加新的用户
     $scope.addUser = function(id, name) {
-        $('.addUser').modal('hide');
-        $http({
-            method: "POST",
-            url: '/users/save',
-            data: $scope.user
-        }).then(function success(data) {
-            console.log('新增成功');
-            //刷新当前页面
-            //待做
-        }, function error(resp) {
-            console.log('保存用户新信息有错');
-        });
-
+        // $('.addUser').modal('hide');
+        var accountname=$scope.user.accountname;
+        var password=$scope.user.password;
+        var repassword=$scope.user.repassword;
+        if(accountname&&password&&repassword){
+            if(password==repassword){
+                $http({
+                    method: "POST",
+                    url: '/user/register',
+                    data: {
+                        accountname:$scope.user.accountname,
+                        password:md5($scope.user.password),
+                        repassword:md5($scope.user.repassword)
+                    }
+                }).then(function success(data) {
+                    if(data.code=='0'){
+                        $scope.user={};
+                        $('.addUser').modal('hide');
+                        $window.location.reload();
+                    }else{
+                        $scope.err_tip=data.data.msg;
+                    }
+                }, function error(resp) {
+                    console.log(resp);
+                    //新建用户失败
+                    //2秒蒙层
+                });
+            }else{
+                $scope.err_tip='两次输入的密码不一致';
+            }
+        }else{
+            $scope.err_tip='账户名和密码不能为空';
+        }
     }
 
 
 
 
-    //从列表中删除某篇文章，做是否删除的确认操作
+    //从列表中删除用户，做是否删除的确认操作
     $scope.remove = function(id) {
         $scope.deleteid = id;
         angular.element('.remove-document').modal('show');
     }
 
-    //从数据库中删除某篇文章
+    //从数据库中删除用户
     $scope.remove_user = function(id) {
         angular.element('.remove-user').modal('hide');
         $http({
