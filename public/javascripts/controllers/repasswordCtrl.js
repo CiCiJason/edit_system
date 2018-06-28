@@ -1,46 +1,37 @@
 app.controller('repasswordCtrl', ['$scope', '$http', '$window', '$location', function($scope, $http, $window, $location) {
 
     $scope.user = {};
-    $scope.tip = '';
+    $scope.err_tip = '';
 
-    $scope.saveUser = function() {
-        if (!$scope.user.password) {
-            $scope.tip = '请输入原始密码';
-            return;
+    $scope.saveUser=function(){
+        if($scope.user.password&&$scope.user.newpassword&&$scope.user.renewpassword){
+            if($scope.user.newpassword==$scope.user.renewpassword){
+                $http({
+                    method:"PUT",
+                    url:'/user/repassword',
+                    data:{
+                        password: md5($scope.user.password),
+                        newpassword: md5($scope.user.newpassword),
+                        renewpassword: md5($scope.user.renewpassword)
+                    }
+                }).then(function success(data){
+                    $scope.save_tip = "修改成功";
+                    $scope.user={};
+                },function error(resp){
+                    $scope.save_tip = "修改失败，请重新尝试";
+                    $scope.user={};
+                });
+            }else{
+                $scope.err_tip='两次输入的新密码不一致';
+            }
+        }else{
+            $scope.err_tip='请输入原密码和新密码';
         }
-        if (!$scope.user.newpassword) {
-            $scope.tip = '请输入新密码';
-            return;
-        }
-        if (!$scope.user.renewpassword) {
-            $scope.tip = '请再次输入新密码';
-            return;
-        }
-        if ($scope.user.newpassword == $scope.user.renewpassword) {
-            $http({
-                method: "POST",
-                url: '/users/repassword',
-                data: {
-                    password: md5($scope.user.password),
-                    newpassword: md5($scope.user.newpassword),
-                    renewpassword: md5($scope.user.renewpassword)
-                }
-            }).then(function success(data) {
-                $scope.save_tip = "修改成功";
-                angular.element('.save_tip').modal('show');
+    }
 
-                setTimeout(function() {
-                    $scope.save_tip = "";
-                    $scope.user = {};
-                    angular.element('.save_tip').modal('hide');
-                }, 1500);
-
-            }, function error(resp) {
-                console.log('修改密码失败');
-            });
-        } else {
-            $scope.tip = '两次输入的新密码不符';
-        }
+    $scope.cancel=function () {
+        $scope.user={};
+        $scope.err_tip='';
     }
 
 }]);

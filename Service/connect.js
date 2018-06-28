@@ -6,35 +6,35 @@ var serverName = require('../conf/config');
 
 module.exports = {
     connect_server: function(method, url, data, callback) {
-        if (method == 'POST') {
+        if (method == 'POST'|| method == 'PUT' || method == 'PATCH') {
             request({
                     method: method,
                     url: serverName.serverName + url,
-                    form: data,
+                    body: data,
                     json: true
                 },
                 function(error, response, body) {
 
                     if (error) {
                         console.log(error);
-                        callback({code:'500',nsg:'连接后台服务器出错'})
+                        callback({code:'500',msg:'连接后台服务器出错'})
                     }
 
                     callback(body);
                 })
             } 
-        if (method == 'GET') {
+        if (method == 'GET' || method == 'DELETE') {
             request({
                     method: method,
                     url:serverName.serverName + url,
-                    qs: data||'1',
+                    qs: data,
                     json: true
                 },
                 function(error, response, body) {
 
                     if (error) {
                         console.log(error);
-                        callback({code:'500',nsg:'连接后台服务器出错'})
+                        callback({code:'500',msg:'连接后台服务器出错'})
                     }
 
                     callback(body); 

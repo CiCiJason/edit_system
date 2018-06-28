@@ -43,6 +43,11 @@ app.config(['$stateProvider', '$urlRouterProvider', '$interpolateProvider', func
             templateUrl: '/user/add',
             controller: 'addCtrl'
         })
+        .state('index.type', {
+            url: '/type',
+            templateUrl: '/type',
+            controller: 'typeCtrl'
+        })
         .state('index.repassword', {
             url: '/user/repassword',
             templateUrl: '/user/repassword',
@@ -56,14 +61,3 @@ app.config(['$stateProvider', '$urlRouterProvider', '$interpolateProvider', func
     $urlRouterProvider.otherwise('login');
 
 }]);
-
-/**
- * 自定义显示年月日过滤器
- * monogoose的时候格式是这样的2018-06-27T07:43:12.161Z
- */
-app.filter(date,function () {
-    return function(text){
-        var text=String(text);
-        return text.substr(0,10);
-    }
-});

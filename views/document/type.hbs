@@ -1,0 +1,146 @@
+{{!-- 添加新的类型 --}}
+<div class="modal fade addType" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">新添文档类型</h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label for="typename">文档类型：</label>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" name="typename" placeholder="请输入文档类型名称" ng-model="doc.typename"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="from">
+                    <div class="col-md-6 col-md-offset-3" style="color:red">
+                        [[err_tip]]
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" ng-click="addType()">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{!-- 编辑类型名称 --}}
+<div class="modal fade edit_type" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">编辑文档类型</h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label for="typename">文档类型：</label>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" name="typename" placeholder="请输入文档类型名称" ng-model="editdoc.typename"/>
+                        </div>
+                    </div>
+                </div>
+
+                <span ng-if="false" ng-bind="editid"></span><span ng-if="false" ng-bind="oldtype"></span>
+
+                <div class="from">
+                    <div class="col-md-6 col-md-offset-3" style="color:red">
+                        [[type_err_tip]]
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" ng-click="canceledit()">取消</button>
+                <button type="button" class="btn btn-primary" ng-click="editType()">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{{!-- 删除文档 --}}
+<div class="modal fade remove-type" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="gridSystemModalLabel">删除文档类型</h4>
+            </div>
+            <div class="modal-body">
+                <p>确认要删除该文档类型吗？</p>
+                <span ng-if="false" ng-bind="deleteid"></span>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-default" ng-click="delete(deleteid)">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{{!-- 提示信息 --}}
+<div class="modal fade save_tip" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <h2>[[save_tip]]</h2>
+        </div>
+    </div>
+</div>
+
+
+<div class="container">
+
+    <div class="panel panel-info">
+
+        <div class="panel-heading">
+            <span class="panel-title">文档类型</span>
+            <button type="button" class="btn btn-primary more" data-toggle="modal" data-target=".addType">
+                <span class="glyphicon glyphicon-plus"></span>新增</button>
+        </div>
+
+        <div class="panel-body">
+
+            <table class="table table-striped table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <th>序号</th>
+                        <th>文档类型</th>
+                        <th>创建人</th>
+                        <th>创建时间</th>
+                        <th>修改人</th>
+                        <th>修改时间</th>
+                        <th>操作列</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="(index,x) in types">
+                        <td>[[index+1]]</td>
+                        <td>[[x.typename]]</td>
+                        <td>创建人</td>
+                        <td>[[x.createTime]]</td>
+                        <td>修改人</td>
+                        <td>[[x.lastEditTime]]</td>
+                        <td>
+                            <button type="button" class="btn btn-warning" ng-click="edit([[x]])">编辑</button>
+                            <button type="button" class="btn btn-danger" ng-click="remove([[x._id]])">删除</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>

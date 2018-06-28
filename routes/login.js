@@ -18,6 +18,9 @@ router.get('/input', function(req, res, next) {
 router.get('/modify', function(req, res, next) {
     res.render('document/modify', { layout: null });
 });
+router.get('/type', function(req, res, next) {
+    res.render('document/type', { layout: null });
+});
 
 //退出系统
 router.get('/logout', function(req, res) {
