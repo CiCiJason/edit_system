@@ -4,18 +4,17 @@ app.controller('modifyCtrl', ['$scope', '$http', '$window', '$location', functio
     //获取数据库中，目前的正式文章
     //做分页处理
 
-
     function init() {
         $http({
             method: 'GET',
-            url: '/document/read',
+            url: '/document/list',
             params: { draft: false }
         }).then(
             function success(data) {
-                $scope.drafts = data.data;
+                $scope.documents = data.data;
             },
             function error(resp) {
-                console.log('请求有误');
+                console.log(resp);
             }
         );
     }
@@ -23,53 +22,48 @@ app.controller('modifyCtrl', ['$scope', '$http', '$window', '$location', functio
     init();
 
 
-    //编辑草稿箱中的一篇文章
-    //直接通过网址链接写，在输入页做判断
-
-
-
-
-
-
     //从列表中删除某篇文章，做是否删除的确认操作
     $scope.remove = function(id) {
-        $scope.deleteid = id;
+        $scope.deleteid = id[0][0];
         angular.element('.remove-document').modal('show');
     }
 
 
-
-
     //从数据库中删除某篇文章
-    $scope.remove_document = function(id) {
+    $scope.delete = function (id) {
+        $scope.deleteid='';
         angular.element('.remove-document').modal('hide');
+
         $http({
-            method: 'GET',
+            method: 'DELETE',
             url: '/document/delete',
-            params: id
+            params: {id:id}
         }).then(
             function success(data) {
-                //刷新页面
-                $scope.save_tip = '删除成功';
+                $scope.save_tip = data.data.msg;
                 angular.element('.save_tip').modal('show');
 
+                setTimeout(function () {
+                    angular.element('.save_tip').modal('hide');
+                    setTimeout(function () {
+                        init();
+                    }, 400);
+                }, 1500);
+
+            },
+            function error(resp) {
+                //删除失败
+                $scope.save_tip = '删除失败';
+                angular.element('.save_tip').modal('show');
 
                 setTimeout(function() {
                     angular.element('.save_tip').modal('hide');
                     setTimeout(function() {
-                        // $window.location.href = "#!/info";
-                        // 刷新当前页面
-                        $state.reload('index.modify');
+                        init();
                     }, 400);
                 }, 1500);
-            },
-            function error(resp) {
-
             }
         );
     }
-
-
-
 
 }]);

@@ -8,7 +8,7 @@ var formidable = require('formidable'),
     // TITLE = 'photos上传',
     PHOTOS_UPLOAD_FOLDER = '/photos/', //图片最后存储的路径
     PHOTOS_TEMP_FOLDER = '/temp/', //图片临时存放的路径
-    PHOTOS_ABSOLUTE_FOLDER = "E:\\workspace\\yangziyun-angularJs\\public\\photos\\", //图片最后存储的绝对路径
+    PHOTOS_ABSOLUTE_FOLDER = "E:\\workspace\\github\\edit_system\\public\\photos\\", //图片最后存储的绝对路径
     domain = "http://localhost:3000"; //图片所在的服务器
 
 
@@ -69,28 +69,27 @@ router.post('/', function(req, res, next) {
         // let userName = 'liuqin';
 
         let month = new Date().getMonth() + 1 < 10 ? '0' + (new Date().getMonth() + 1) : new Date().getMonth() + 1;
-        let today = String(new Date().getFullYear()) + month + String(new Date().getDate());
-
-
+        let date = new Date().getDate() +1 <10 ? '0' + (new Date().getDate()) : new Date().getDate();
+        let today = String(new Date().getFullYear()) + month + date;
 
 
         // let userPhotoPath = PHOTOS_UPLOAD_FOLDER + res.locals.user.userName + '/';
-        let userPhotoPath = PHOTOS_UPLOAD_FOLDER + today + '/';
+        let userPhotoPath = PHOTOS_UPLOAD_FOLDER + today + '/';  //   /photos/20180703/
 
         //console.log("save the file.");
 
         // let photoName = Math.random() + '.' + extName;
-        let photoName = files.file.name;
+        let photoName = files.file.name;         //  111.jpg
 
         //图片写入地址，不同用户文件夹不一样；
-        let newPath = 'public' + userPhotoPath + photoName;
+        let newPath = 'public' + userPhotoPath + photoName;    //   "public/photos/20180703/111.jpg"
 
 
         //显示地址；
-        let showUrl = domain + userPhotoPath + photoName;
+        let showUrl = domain + userPhotoPath + photoName;     //     "http://localhost:3000/photos/20180703/111.jpg"
         //用户照片文件夹的绝对路径，因为fs.mkdir创建文件夹必须使用绝对路径
 
-        let userPhotoFolderPath = PHOTOS_ABSOLUTE_FOLDER + today;
+        let userPhotoFolderPath = PHOTOS_ABSOLUTE_FOLDER + today;   // "E:\workspace\yangziyun-angularJs\public\photos\20180703"
 
 
         async.series([ //async.series函数可以控制函数按顺序执行，从而保证最后的函数在所有其他函数完成之后执行

@@ -33,6 +33,11 @@ app.config(['$stateProvider', '$urlRouterProvider', '$interpolateProvider', func
             templateUrl: '/input',
             controller: 'inputCtrl'
         })
+        .state('index.view', {
+            url: '/view',
+            templateUrl: '/view',
+            controller: 'viewCtrl'
+        })
         .state('index.modify', {
             url: '/modify',
             templateUrl: '/modify',

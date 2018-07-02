@@ -10,13 +10,14 @@ app.controller('typeCtrl', ['$scope', '$http', '$window', '$location', function(
     function init() {
         $http({
             method: 'GET',
-            url: '/type/list'
+            url: '/type/list',
+            params:{all:'all'}
         }).then(
             function success(data) {
                 $scope.types = data.data;
             },
             function error(resp) {
-                console.log('请求有误');
+                console.log(resp);
             }
         );
     }

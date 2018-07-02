@@ -97,7 +97,17 @@ header a {
     /* width: 768px; */
     border: 1px solid #eee;
     margin: 20px auto;
+    /* text-align: center; */
+}
+
+.modal_show_doc .modal_title,
+.modal_show_doc .modal_subtitle{
     text-align: center;
+}
+
+.modal_show_doc .content{
+    padding-left: 2em;
+    padding-right: 2em;
 }
 
 .modal_show_doc hr {

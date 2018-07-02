@@ -1,0 +1,36 @@
+<div class="view">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+                <div class="modal_show_doc">
+                    <h1 class="modal_title">
+                        [[document.title]]
+                    </h1>
+                    <h3 class="modal_subtitle">
+                        [[document.subtitle]]
+                    </h3>
+                    <p class="modal_time">
+                        [[document.releaseTime|date:'yyyy-MM-dd']]
+                    </p>
+                    <hr>
+                    <div class="content">
+                        <div froala-view="document.content"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    <div class="doc_submit">
+        <span class="btn btn-lg btn-primary">
+            <a style="color: #fff" href="#!/index/input?id=[[document._id]]">编辑</a>
+        </span>
+
+        <span class="btn btn-lg btn-warning">
+            <a style="color: #fff" href="javascript:history.go(-1)">返回</a>
+        </span>
+    </div>
+
+</div>

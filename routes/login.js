@@ -21,14 +21,18 @@ router.get('/modify', function(req, res, next) {
 router.get('/type', function(req, res, next) {
     res.render('document/type', { layout: null });
 });
+router.get('/view',function(req,res,next){
+    res.render('document/view', { layout: null });
+});
 
 //退出系统
 router.get('/logout', function(req, res) {
 
     req.session.destroy();
 
-    res.redirect('/login');
-    // res.render('login', { layout: null });
+    // res.redirect('/login');
+    // // res.render('login', { layout: null });
+    res.render('logout', { layout: null });
 });
 
 //保存文档

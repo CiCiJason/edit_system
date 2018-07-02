@@ -1,20 +1,20 @@
  <div class="modal fade remove-document" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="gridSystemModalLabel">删除文档</h4>
-                </div>
-                <div class="modal-body">
-                    <p>确认要删除该文档吗？删除之后，不可恢复！！！</p>
-                    <span ng-hide="ture" ng-bind="[[deleteid]]"></span>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
-                    <button type="button" class="btn btn-default" ng-click="remove_document([[deleteid]])">确定</button>
-                </div>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="gridSystemModalLabel">删除文档</h4>
+            </div>
+            <div class="modal-body">
+                <p>确认要删除该文档吗？删除之后，不可恢复！！！</p>
+                <span ng-if="false" ng-bind="deleteid"></span>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-default" ng-click="delete(deleteid)">确定</button>
             </div>
         </div>
     </div>
+</div>
 
 
     <div class="modal fade save_tip" tabindex="-1" role="dialog">
@@ -63,18 +63,13 @@
         </div>
     </div>
 
-    
-
-
     <div class="panel panel-info">
-
         <div class="panel-heading" style="text-align:left">
             <span class="panel-title">我的草稿箱</span>
             <a type="button" class="btn btn-primary more" href="/#!/index/input">
                 <span class="glyphicon glyphicon-plus"></span>
                 新增</a>
         </div>
-
 
         <div class="panel-body">
 
@@ -89,30 +84,23 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="(item,index) in drafts">
-                    {{!-- <tr> --}}
+                    <tr ng-repeat="(index,x) in documents">
                         <td>[[index+1]]</td>
-                        <td>[[item.title]]</td>
-                        <td>[[item.type]]</td>
-                        <td>[[item.pubdate]]</td>
+                        <td>[[x.title]]</td>
+                        <td>[[x.typename]]</td>
+                        <td>[[x.releaseTime]]</td>
                         <td>
                             <span class="btn btn-primary">
-                                <a style="color: #fff" href="#!/index/input?id=[[item.doc_id]]&type=edit">编辑</a>
+                                <a style="color: #fff" href="#!/index/input?id=[[x._id]]">编辑</a>
                             </span>
-
-                            <button type="button" class="btn btn-danger" ng-click="remove([[item.doc_id]])">删除</button>
-
+                            <span class="btn btn-warning">
+                                <a style="color: #fff" href="#!/index/view?id=[[x._id]]">查看</a>
+                            </span>
+                            <button type="button" class="btn btn-danger" ng-click="remove([[x._id]])">删除</button>
                         </td>
                     </tr>
-
                 </tbody>
             </table>
-
         </div>
     </div>
-
 </div>
-
-
-
-
