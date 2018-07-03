@@ -68,7 +68,7 @@ app.controller('typeCtrl', ['$scope', '$http', '$window', '$location', function(
                     data:{
                         oldtype:$scope.oldtype,
                         newtype:$scope.editdoc.typename,
-                        id:$scope.editid
+                        _id:$scope.editid
                     }
                 }).then(function success(data){
                     if(data.data.code=='0'){
@@ -114,7 +114,7 @@ app.controller('typeCtrl', ['$scope', '$http', '$window', '$location', function(
             method: 'delete',
             url: '/type/delete',
             params: {
-                id: id
+                _id: id
             },
         }).then(
             function success(data) {
@@ -127,7 +127,7 @@ app.controller('typeCtrl', ['$scope', '$http', '$window', '$location', function(
                     setTimeout(function() {
                         init();
                     }, 400);
-                }, 1500);
+                }, 2000);
             },
             function error(resp) {
                 //删除失败
@@ -139,10 +139,9 @@ app.controller('typeCtrl', ['$scope', '$http', '$window', '$location', function(
                     setTimeout(function() {
                         init();
                     }, 400);
-                }, 1500);
+                }, 2000);
             }
         );
     }
-
 
 }]);

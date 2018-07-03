@@ -23,7 +23,7 @@ app.controller('inputCtrl', ['$scope', '$http', '$window', '$location', function
             $http({
                 method: 'GET',
                 url: '/document/view',
-                params: { id: $location.$$search.id }
+                params: { _id: $location.$$search.id }
             }).then(
                 function success(data) {
                     $scope.document = data.data;
@@ -95,35 +95,6 @@ app.controller('inputCtrl', ['$scope', '$http', '$window', '$location', function
     $scope.inputOptions = {
         imageUploadURL: '/upload_image'
     };
-
-
-    //编辑某一个存在数据库中的文章
-    if ($location.$$search.id && $location.$$search.type == 'edit') {
-        $http({
-            method: 'GET',
-            url: '/document/getOnedocument',
-            params: {
-                id: $location.$$search.id
-            }
-        }).then(function success(data) {
-                // $scope.document.typename = data.data.typename;
-                // $scope.document.title = data.data.title;
-                // $scope.document.subtitle = data.data.subtitle;
-                // $scope.document.releaseTime = data.data.releaseTime;
-                // $scope.document.content = data.data.content;
-
-                $scope.document.typename = '通知公告';
-                $scope.document.title = '标题1';
-                $scope.document.subtitle = '';
-                $scope.document.releaseTime = new Date();
-                $scope.document.content = '这是正文';
-            },
-            function error(resp) {
-
-            });
-    }
-
-
 
 
 }]);

@@ -35,13 +35,13 @@ app.controller('indexCtrl', ['$scope', '$http', '$window', '$location', function
 
     //从数据库中删除某篇文章
     $scope.delete = function (id) {
-        $scope.deleteid="";
+        $scope.deleteid = "";
         angular.element('.remove-document').modal('hide');
 
         $http({
             method: 'DELETE',
             url: '/document/delete',
-            params: {id:id}
+            params: { _id: id }
         }).then(
             function success(data) {
                 $scope.save_tip = data.data.msg;
@@ -60,9 +60,9 @@ app.controller('indexCtrl', ['$scope', '$http', '$window', '$location', function
                 $scope.save_tip = '删除失败';
                 angular.element('.save_tip').modal('show');
 
-                setTimeout(function() {
+                setTimeout(function () {
                     angular.element('.save_tip').modal('hide');
-                    setTimeout(function() {
+                    setTimeout(function () {
                         init();
                     }, 400);
                 }, 1500);
@@ -71,6 +71,42 @@ app.controller('indexCtrl', ['$scope', '$http', '$window', '$location', function
     }
 
 
+    //将某篇文章从草稿箱提交至数据库
+    $scope.submit = function (id) {
+        $http({
+            method: 'POST',
+            url: '/document/add',
+            data: {
+                _id: id[0][0],
+                draft: false
+            }
+        }).then(function success(data) {
+            if (data.data.code == '0') {
+                $scope.save_tip = '操作成功';
+                angular.element('.save_tip').modal('show');
 
+                setTimeout(function () {
+                    angular.element('.save_tip').modal('hide');
+                    setTimeout(function () {
+                        init();
+                    }, 400);
+                }, 2000);
+            } else {
+                $scope.save_tip = '操作失败';
+                angular.element('.save_tip').modal('show');
+
+                setTimeout(function () {
+                    angular.element('.save_tip').modal('hide');
+                }, 2000);
+            }
+        }, function error(resp) {
+            $scope.save_tip = '操作失败';
+            angular.element('.save_tip').modal('show');
+
+            setTimeout(function () {
+                angular.element('.save_tip').modal('hide');
+            }, 2000);
+        });
+    }
 
 }]);

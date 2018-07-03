@@ -74,7 +74,7 @@ app.controller('addCtrl', ['$scope', '$http', '$window', '$location', function($
             method: 'delete',
             url: '/user/delete',
             params: {
-                id: id
+                _id: id
             },
         }).then(
             function success(data) {
@@ -120,7 +120,7 @@ app.controller('addCtrl', ['$scope', '$http', '$window', '$location', function($
             method: "PUT",
             url: '/user/resetpwd',
             data: {
-                id: id
+                _id: id
             },
         }).then(function success(data) {
             $scope.save_tip = data.data.msg;
