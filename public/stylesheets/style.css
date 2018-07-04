@@ -168,3 +168,18 @@ header a {
     font-size: 2rem;
     font-weight: 600;
 }
+
+div.page{
+    position: relative;
+    text-align: right;
+}
+
+div.page span{
+    position: absolute;
+    bottom: 2rem;
+    left: 1rem;
+}
+
+ul.pagination{
+    display: inline-block;
+}

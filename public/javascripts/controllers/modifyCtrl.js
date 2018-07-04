@@ -1,15 +1,14 @@
 app.controller('modifyCtrl', ['$scope', '$http', function ($scope, $http) {
-    $scope.document={};
-
     //初始化
-    //获取数据库中，目前的正式文章
-    //做分页处理
+    $scope.document={};
+    $scope.document.typename='all';
 
-    function init() {
+    //获取数据库中，目前的正式文章
+    function getDocList(params){
         $http({
             method: 'GET',
             url: '/document/list',
-            params: { draft: false }
+            params: params
         }).then(
             function success(data) {
                 $scope.documents = data.data;
@@ -17,7 +16,10 @@ app.controller('modifyCtrl', ['$scope', '$http', function ($scope, $http) {
             function error(resp) {
                 console.log(resp);
             }
-        );
+        )
+    }
+
+    function getTypeList(){
         $http({
             method: 'GET',
             url: '/type/list',
@@ -31,10 +33,19 @@ app.controller('modifyCtrl', ['$scope', '$http', function ($scope, $http) {
             function error(resp) {
                 console.log(resp);
             }
-        );
+        )
+    }
+
+    function init() {
+        getDocList({ draft: false });
+        getTypeList();
     }
 
     init();
+
+
+    //做分页处理
+    $scope.option = {};
 
 
     //从列表中删除某篇文章，做是否删除的确认操作
@@ -122,18 +133,11 @@ app.controller('modifyCtrl', ['$scope', '$http', function ($scope, $http) {
 
     //筛选某一类文档
     $scope.changeTypename=function(){
-        $http({
-            method: 'GET',
-            url: '/document/list',
-            params: { draft: false,typename:$scope.document.typename }
-        }).then(
-            function success(data) {
-                $scope.documents = data.data;
-            },
-            function error(resp) {
-                console.log(resp);
-            }
-        );
+        if($scope.document.typename=='all'){
+            getDocList({ draft: false });
+        }else{
+            getDocList({ draft: false,typename:$scope.document.typename });
+        }
     }
 
 }]);
