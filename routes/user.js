@@ -21,8 +21,17 @@ router.get('/repassword', function(req, res, next) {
 router.post('/login',function(req,res,next){
     if(req.body.accountname&&req.body.password){
         connect_server.connect_server('POST',req.originalUrl,req.body,function(data){
-            console.log(data);
-            return res.json(data);
+            // console.log(data);
+            // return res.json(data);
+            if(data.code=='0'){
+                req.session._id=data._id;
+                req.session.accountname=data.accountname;
+                req.session.logined=data.logined;
+                req.historyUrl=req.path;
+                return ReadableStream.json({code:'0',msg:'登录成功'});
+            }else{
+                return res.json(data);
+            }
         });
     }else{
         return res.json({code:'1',msg:'用户名和密码不能为空'});

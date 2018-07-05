@@ -3,7 +3,7 @@ angular.module('cici.pagination', []).directive('ciciPagination', [function() {
         restrict: 'EA',
         replace: true,
         scope: {
-            option: '=pageOption' //template里面的option和html里面的双向绑定
+            option: '=pageoption' //template里面的option和html里面的双向绑定
         },
         template: '<ul class="pagination">' +
             '<li ng-click="pageClick(p)" ng-repeat="p in page" class="{{option.curr==p?\'active\':\'\'}}">' +
@@ -16,12 +16,12 @@ angular.module('cici.pagination', []).directive('ciciPagination', [function() {
             if (!$scope.option.all || isNaN($scope.option.all) || $scope.option.all < 1) $scope.option.all = 1;
             //all,总页数
             if ($scope.option.curr > $scope.option.all) $scope.option.curr = $scope.option.all;
-            //count,最多显示的页数，默认为10
+            //count,分页标签显示数目，默认为10
             if (!$scope.option.count || isNaN($scope.option.count) || $scope.option.count < 1) $scope.option.count = 10;
 
 
             //得到显示页数的数组
-            $scope.page = getRange($scope.option.curr, $scope.option.all, $scope.option.count);
+            $scope.page = getRange($scope.option.curr, $scope.option.all, $scope.option.count)||1;
 
             //绑定点击事件
             $scope.pageClick = function(page) {
@@ -39,7 +39,6 @@ angular.module('cici.pagination', []).directive('ciciPagination', [function() {
                     $scope.option.curr = page;
                     $scope.page = getRange($scope.option.curr, $scope.option.all, $scope.option.count);
                 }
-
             };
 
             //返回页数范围（用来遍历）
