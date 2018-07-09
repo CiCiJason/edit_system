@@ -27,14 +27,18 @@ app.controller('loginCtrl', ['$scope', '$http', '$window', '$location', function
                 function success(resp) {
                     //响应成功时调用，resp是一个响应对象  
                     if (resp.data.code == '0') {
-                        $window.location.href = "#!/index/info";
+                        if($location.url()=='/login'){
+                            $location.url('/index/info');
+                        }else{
+                            $window.location.reload();
+                        }
                     } else {
                         $scope.resultmsg = resp.data.msg;
                     }
                 },
                 function error(resp) {
                     // 响应失败时调用，resp带有错误信息  
-                    $window.location.href = "#!/login";
+                    $window.location.href = "/#!/login";
                 }
             );
         }

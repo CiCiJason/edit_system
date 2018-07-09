@@ -27,8 +27,8 @@ router.post('/login',function(req,res,next){
                 req.session._id=data._id;
                 req.session.accountname=data.accountname;
                 req.session.logined=data.logined;
-                req.historyUrl=req.path;
-                return ReadableStream.json({code:'0',msg:'登录成功'});
+                req.session.admin=data.admin;
+                return res.json({code:'0',msg:'登录成功'});
             }else{
                 return res.json(data);
             }

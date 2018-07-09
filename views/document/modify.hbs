@@ -47,7 +47,7 @@
                             文档类型
                             <select name="type" id="type" class="" ng-model="document.typename" ng-change="changeTypename()">
                                 <option value="all">所有</option>
-                                <option value="[[x.typename]]" ng-repeat="x in types">[[x.typename]]</option>
+                                <option value="[[x._id]]" ng-repeat="x in types">[[x.typename]]</option>
                             </select>
                         </th>
                         <th style="min-width:100px">发布时间</th>
@@ -59,7 +59,12 @@
                     <tr ng-repeat="(index,x) in documents">
                         <td>[[index+1]]</td>
                         <td>[[x.title]]</td>
-                        <td>[[x.typename]]</td>
+                        {{!-- <td>[[x.typename]]</td> --}}
+                        <td>
+                            <select name="type" id="type" class="form-control" ng-model="x.typenameid">
+                                <option value="[[x._id]]" ng-repeat="x in types">[[x.typename]]</option>
+                            </select>
+                        </td>
                         <td>[[x.releaseTime|date:'yyyy-MM-dd']]</td>
                         <td>[[x.count]]</td>
                         <td>
@@ -80,8 +85,9 @@
         </div>
 
         <div class="page">
-            <span>总共[[pages]]页，总共[[counts]]条数据</span>
-            <cici-pagination pageoption="pageoption"></cici-pagination>
+            {{!-- <span>总共[[pages]]页，总共[[counts]]条数据</span>
+            <cici-pagination pageoption="pageoption"></cici-pagination> --}}
+            {{!-- <jason-pagination conf='paginationConf'></jason-pagination> --}}
         </div>
     </div>
 </div>

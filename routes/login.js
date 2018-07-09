@@ -28,7 +28,12 @@ router.get('/view',function(req,res,next){
 //退出系统
 router.get('/logout', function(req, res) {
 
-    req.session.destroy();
+    // req.session.destroy();
+    req.session._id='';
+    req.session.accountname='';
+    req.session.logined='';
+
+    console.log(req.session);
 
     // res.redirect('/login');
     // // res.render('login', { layout: null });

@@ -4,16 +4,9 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var session=require('express-session');
 var logger = require('morgan');
-var session = require('express-session');
 
 var apiAuth = require("./utils/Validauth");
 var routes = require('./routes/route');
-
-
-// var indexRouter = require('./routes/index');
-// var usersRouter = require('./routes/users');
-// var loginRouter = require('./routes/login');
-
 
 var app = express();
 

@@ -1,4 +1,4 @@
-var app = angular.module('editSystem', ['ui.router', 'froala','cici.pagination'])
+var app = angular.module('editSystem', ['ui.router', 'froala','jason.pagination'])
     .value('froalaConfig', {
         toolbarInline: false,
         placeholderText: '请在这里输入你的文档正文内容'
@@ -16,8 +16,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$interpolateProvider', func
     $stateProvider
         .state('login', {
             url: '/login',
-            templateUrl: '/login',
-            controller: 'loginCtrl'
+            templateUrl: '/login'
         })
         .state('index', {
             url: '/index',

@@ -129,9 +129,9 @@
                     <tr ng-repeat="(index,x) in types">
                         <td>[[index+1]]</td>
                         <td>[[x.typename]]</td>
-                        <td>创建人</td>
+                        <td>[[x.accountname]]</td>
                         <td>[[x.createTime|date:'yyyy-MM-dd']]</td>
-                        <td>修改人</td>
+                        <td>[[x.lastEditPerson]]</td>
                         <td>[[x.lastEditTime|date:'yyyy-MM-dd']]</td>
                         <td>
                             <button type="button" class="btn btn-warning" ng-click="edit([[x]])">编辑</button>

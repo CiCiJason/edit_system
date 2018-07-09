@@ -21,6 +21,19 @@ app.controller('indexCtrl', ['$scope', '$http', '$window', '$location', function
                 console.log(resp);
             }
         );
+
+        $http({
+            method: 'GET',
+            url: '/type/list',
+            params:{all:'typename'}
+        }).then(
+            function success(data) {
+                $scope.types = data.data;
+            },
+            function error(resp) {
+                console.log(resp);
+            }
+        );
     }
 
     init();

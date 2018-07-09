@@ -3,6 +3,7 @@ var request = require('request');
 var serverName = require('../conf/config');
 //判断obj是否为json对象  
 //    
+var request=request.defaults({jar:true});
 
 module.exports = {
     connect_server: function(method, url, data, callback) {

@@ -14,6 +14,7 @@ module.exports = function (req, res, next) {
         } else {
 
             res.redirect('/login');
+            return;
 
         }
     }

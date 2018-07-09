@@ -15,10 +15,20 @@ app.controller('repasswordCtrl', ['$scope', '$http', '$window', '$location', fun
                         renewpassword: md5($scope.user.renewpassword)
                     }
                 }).then(function success(data){
-                    $scope.save_tip = "修改成功";
-                    $scope.user={};
+                    if(data.data.code=='0'){
+                        $scope.user={};
+                        $scope.save_tip = data.data.msg;
+                        angular.element('.save_tip').modal('show');
+        
+                        setTimeout(function () {
+                            angular.element('.save_tip').modal('hide');
+                        }, 1500);
+                    }else{
+                        $scope.err_tip = data.data.msg;
+                        $scope.user={};
+                    }
                 },function error(resp){
-                    $scope.save_tip = "修改失败，请重新尝试";
+                    $scope.err_tip = "修改失败，请重新尝试";
                     $scope.user={};
                 });
             }else{

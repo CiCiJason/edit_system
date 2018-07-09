@@ -40,7 +40,7 @@
                         <label for="">用户名：</label>
                     </div>
                     <div class="col-md-3 col-sm-6 col-xs-8">
-                        {{username}}
+                        {{accountname}}
                     </div>
                 </div>
             </div>
@@ -87,7 +87,13 @@
                     <tr ng-repeat="(index,x) in documents">
                         <td>[[index+1]]</td>
                         <td>[[x.title]]</td>
-                        <td>[[x.typename]]</td>
+                        {{!-- <td>[[x.typename]]</td>
+                         --}}
+                        <td>
+                            <select name="type" id="type" class="form-control" ng-model="x.typenameid">
+                                <option value="[[x._id]]" ng-repeat="x in types">[[x.typename]]</option>
+                            </select>
+                        </td>
                         <td>[[x.releaseTime|date:'yyyy-MM-dd']]</td>
                         <td>
                             <span class="btn btn-primary">

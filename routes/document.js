@@ -5,6 +5,13 @@ var connect_server = require('../Service/connect');
 
 //获取所有类型列表
 
+// router.get('/list', function (req, res, next) {
+//     connect_server.connect_server('GET', req.originalUrl, req.query, function (data) {
+//         console.log(data);
+//         return res.json(data);
+//     })
+// });
+
 router.get('/list', function (req, res, next) {
     connect_server.connect_server('GET', req.originalUrl, req.query, function (data) {
         console.log(data);

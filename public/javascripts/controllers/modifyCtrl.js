@@ -3,49 +3,71 @@ app.controller('modifyCtrl', ['$scope', '$http', function ($scope, $http) {
     $scope.document = {};
     $scope.document.typename = 'all';
     //做分页处理
-    $scope.pageoption = {};
-    $scope.counts='';
-    $scope.pages='';
+    // $scope.pageoption = {};
+
+
+    // $scope.paginationConf = {
+    //     currentPage: 1,
+    //     itemsPerPage: 10,
+    //     action: "",
+    //     actionform: ""
+    // };
+
+    // $scope.counts='';
+    // $scope.pages='';
 
     //获取数据库中，目前的正式文章
-    function getDocList(query,page) {
+    // function getDocList(query,page) {
+    //     $http({
+    //         method: 'GET',
+    //         url: '/document/list',
+    //         params: {query,page}
+    //     }).then(
+    //         function success(data) {
+    //             $scope.documents = data.data.documents;
+    //             $scope.counts=data.data.counts;
+    //             $scope.pages=data.data.count;
+    //             $scope.pageoption = {
+    //                 curr: page || 1,
+    //                 all: data.data.count || 1,
+    //                 count:5,
+
+    //                 click: function (p) {
+    //                     $http({
+    //                         method: 'GET',
+    //                         url: '/document/list',
+    //                         params: {query:query,page:{page:p}}
+    //                     }).then(
+    //                         function success(data1) {
+    //                             $scope.documents = data1.data.documents;
+    //                             // $scope.counts = data.data.counts;
+    //                             $scope.page = p;
+    //                             // $scope.pages = data.data.pages;
+    //                         }, function error(resp1) {
+    //                             console.log('分页请求错误');
+    //                         })
+    //                 }
+    //             };
+    //             $scope.pageoption.click(1);
+
+    //         },
+    //         function error(resp) {
+    //             console.log(resp);
+    //         }
+    //     )
+    // }
+
+    function getDocList(data) {
         $http({
             method: 'GET',
             url: '/document/list',
-            params: {query,page}
+            params: data
         }).then(
             function success(data) {
-                $scope.documents = data.data.documents;
-                $scope.counts=data.data.counts;
-                $scope.pages=data.data.count;
-                $scope.pageoption = {
-                    curr: page || 1,
-                    all: data.data.count || 1,
-                    count:5,
-
-                    click: function (p) {
-                        $http({
-                            method: 'GET',
-                            url: '/document/list',
-                            params: {query:query,page:{page:p}}
-                        }).then(
-                            function success(data1) {
-                                $scope.documents = data1.data.documents;
-                                // $scope.counts = data.data.counts;
-                                $scope.page = p;
-                                // $scope.pages = data.data.pages;
-                            }, function error(resp1) {
-                                console.log('分页请求错误');
-                            })
-                    }
-                };
-                $scope.pageoption.click(1);
-
-            },
-            function error(resp) {
-                console.log(resp);
-            }
-        )
+                $scope.documents = data.data;
+            }, function error(resp) {
+                console.log(resp)
+            });
     }
 
     function getTypeList() {
@@ -66,7 +88,7 @@ app.controller('modifyCtrl', ['$scope', '$http', function ($scope, $http) {
     }
 
     function init() {
-        getDocList({ draft: false },{page:1});
+        getDocList({ draft: false });
         getTypeList();
     }
 
@@ -159,9 +181,9 @@ app.controller('modifyCtrl', ['$scope', '$http', function ($scope, $http) {
     //筛选某一类文档
     $scope.changeTypename = function () {
         if ($scope.document.typename == 'all') {
-            getDocList({ draft: false },{page:1});
+            getDocList({ draft: false }, { page: 1 });
         } else {
-            getDocList({ draft: false, typename: $scope.document.typename },{page:1});
+            getDocList({ draft: false, typename: $scope.document.typename }, { page: 1 });
         }
     }
 
