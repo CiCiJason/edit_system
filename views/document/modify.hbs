@@ -41,7 +41,7 @@
             <table class="table table-striped table-hover table-bordered">
                 <thead>
                     <tr>
-                        <th>序号</th>
+                        <th style="min-width:46px">序号</th>
                         <th>文档标题</th>
                         <th style="min-width:80px">
                             文档类型
@@ -61,7 +61,7 @@
                         <td>[[x.title]]</td>
                         {{!-- <td>[[x.typename]]</td> --}}
                         <td>
-                            <select name="type" id="type" class="form-control" ng-model="x.typenameid">
+                            <select name="type" id="type" ng-model="x.typename" style="border:none;background-color:transparent;appearance:none;-moz-appearance:none;-webkit-appearance:none;" disabled>
                                 <option value="[[x._id]]" ng-repeat="x in types">[[x.typename]]</option>
                             </select>
                         </td>
@@ -87,7 +87,6 @@
         <div class="page">
             {{!-- <span>总共[[pages]]页，总共[[counts]]条数据</span>
             <cici-pagination pageoption="pageoption"></cici-pagination> --}}
-            {{!-- <jason-pagination conf='paginationConf'></jason-pagination> --}}
-        </div>
+            <jason-pagination conf='paginationConf'></jason-pagination>
     </div>
 </div>

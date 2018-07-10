@@ -27,6 +27,7 @@ app.controller('inputCtrl', ['$scope', '$http', '$window', '$location', function
             }).then(
                 function success(data) {
                     $scope.document = data.data;
+                    $scope.document.releaseTime=new Date(data.data.releaseTime);
                 },
                 function error(resp) {
                     console.log(resp);
@@ -42,7 +43,7 @@ app.controller('inputCtrl', ['$scope', '$http', '$window', '$location', function
 
         $scope.document.draft = draft;
 
-        if (!$scope.document.typenameid) {
+        if (!$scope.document.typename) {
             $scope.tip = "请选择文档类型";
         } else if (!$scope.document.title) {
             $scope.tip = "请输入文档标题";

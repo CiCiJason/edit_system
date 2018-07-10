@@ -3,7 +3,9 @@ app.controller('modifyCtrl', ['$scope', '$http', function ($scope, $http) {
     $scope.document = {};
     $scope.document.typename = 'all';
     //做分页处理
-    // $scope.pageoption = {};
+    $scope.paginationConf = {
+        pagesLength:10
+    };
 
 
     // $scope.paginationConf = {

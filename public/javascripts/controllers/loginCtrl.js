@@ -28,7 +28,7 @@ app.controller('loginCtrl', ['$scope', '$http', '$window', '$location', function
                     //响应成功时调用，resp是一个响应对象  
                     if (resp.data.code == '0') {
                         if($location.url()=='/login'){
-                            $location.url('/index/info');
+                            $location.url('/index/info').replace();
                         }else{
                             $window.location.reload();
                         }
