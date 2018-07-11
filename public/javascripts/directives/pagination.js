@@ -50,7 +50,7 @@ angular.module('jason.pagination',[]).directive('jasonPagination', [function() {
                 scope.conf.pagesLength = scope.conf.pagesLength - 1;
             }
 
-            // conf.erPageOptions
+            // conf.perPageOptions
             if (!scope.conf.perPageOptions) {
                 scope.conf.perPageOptions = [10, 15, 20, 30, 50];
             }

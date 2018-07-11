@@ -4,69 +4,22 @@ app.controller('modifyCtrl', ['$scope', '$http', function ($scope, $http) {
     $scope.document.typename = 'all';
     //做分页处理
     $scope.paginationConf = {
-        pagesLength:10
+        currentPage: 1,
+        itemPerPage: 10
     };
 
-
-    // $scope.paginationConf = {
-    //     currentPage: 1,
-    //     itemsPerPage: 10,
-    //     action: "",
-    //     actionform: ""
-    // };
-
-    // $scope.counts='';
-    // $scope.pages='';
-
-    //获取数据库中，目前的正式文章
-    // function getDocList(query,page) {
-    //     $http({
-    //         method: 'GET',
-    //         url: '/document/list',
-    //         params: {query,page}
-    //     }).then(
-    //         function success(data) {
-    //             $scope.documents = data.data.documents;
-    //             $scope.counts=data.data.counts;
-    //             $scope.pages=data.data.count;
-    //             $scope.pageoption = {
-    //                 curr: page || 1,
-    //                 all: data.data.count || 1,
-    //                 count:5,
-
-    //                 click: function (p) {
-    //                     $http({
-    //                         method: 'GET',
-    //                         url: '/document/list',
-    //                         params: {query:query,page:{page:p}}
-    //                     }).then(
-    //                         function success(data1) {
-    //                             $scope.documents = data1.data.documents;
-    //                             // $scope.counts = data.data.counts;
-    //                             $scope.page = p;
-    //                             // $scope.pages = data.data.pages;
-    //                         }, function error(resp1) {
-    //                             console.log('分页请求错误');
-    //                         })
-    //                 }
-    //             };
-    //             $scope.pageoption.click(1);
-
-    //         },
-    //         function error(resp) {
-    //             console.log(resp);
-    //         }
-    //     )
-    // }
-
-    function getDocList(data) {
+    function getDocList(queryConf, page) {
+        queryConf.draft=false;
         $http({
             method: 'GET',
             url: '/document/list',
-            params: data
+            params: {
+                queryConf, page
+            }
         }).then(
             function success(data) {
-                $scope.documents = data.data;
+                $scope.paginationConf.totalItems = data.data.totalItems;
+                $scope.documents = data.data.documents;
             }, function error(resp) {
                 console.log(resp)
             });
@@ -78,7 +31,7 @@ app.controller('modifyCtrl', ['$scope', '$http', function ($scope, $http) {
             url: '/type/list',
             params: {
                 all: 'typename'
-            }//all=typename表示从数据库中只输出typename字段
+            }
         }).then(
             function success(data) {
                 $scope.types = data.data;
@@ -90,7 +43,7 @@ app.controller('modifyCtrl', ['$scope', '$http', function ($scope, $http) {
     }
 
     function init() {
-        getDocList({ draft: false });
+        getDocList({typename:$scope.document.typename}, $scope.paginationConf);
         getTypeList();
     }
 
@@ -182,11 +135,11 @@ app.controller('modifyCtrl', ['$scope', '$http', function ($scope, $http) {
 
     //筛选某一类文档
     $scope.changeTypename = function () {
-        if ($scope.document.typename == 'all') {
-            getDocList({ draft: false }, { page: 1 });
-        } else {
-            getDocList({ draft: false, typename: $scope.document.typename }, { page: 1 });
-        }
+        getDocList({typename: $scope.document.typename }, $scope.paginationConf );
     }
+
+    $scope.$watch("$scope.paginationConf.currentPage+$scope.paginationConf.itemPerPage", getDocList({typename: $scope.document.typename }, $scope.paginationConf ));
+    
+
 
 }]);

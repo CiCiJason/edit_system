@@ -12,10 +12,8 @@ module.exports = function (req, res, next) {
         if (logined && accountname) {
             next();
         } else {
-
             res.redirect('/login');
             return;
-
         }
     }
 };

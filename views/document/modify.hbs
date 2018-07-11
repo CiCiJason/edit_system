@@ -18,11 +18,11 @@
 </div>
 
 <div class="modal fade save_tip" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-sm" role="document">
-            <div class="modal-content">
-                <h2>[[save_tip]]</h2>
-            </div>
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <h2>[[save_tip]]</h2>
         </div>
+    </div>
 </div>
 
 
@@ -59,9 +59,11 @@
                     <tr ng-repeat="(index,x) in documents">
                         <td>[[index+1]]</td>
                         <td>[[x.title]]</td>
-                        {{!-- <td>[[x.typename]]</td> --}}
+                        {{!--
+                        <td>[[x.typename]]</td> --}}
                         <td>
-                            <select name="type" id="type" ng-model="x.typename" style="border:none;background-color:transparent;appearance:none;-moz-appearance:none;-webkit-appearance:none;" disabled>
+                            <select name="type" id="type" ng-model="x.typename" style="border:none;background-color:transparent;appearance:none;-moz-appearance:none;-webkit-appearance:none;"
+                                disabled>
                                 <option value="[[x._id]]" ng-repeat="x in types">[[x.typename]]</option>
                             </select>
                         </td>
@@ -85,8 +87,6 @@
         </div>
 
         <div class="page">
-            {{!-- <span>总共[[pages]]页，总共[[counts]]条数据</span>
-            <cici-pagination pageoption="pageoption"></cici-pagination> --}}
             <jason-pagination conf='paginationConf'></jason-pagination>
+        </div>
     </div>
-</div>

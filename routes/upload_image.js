@@ -9,12 +9,12 @@ var formidable = require('formidable'),
     PHOTOS_UPLOAD_FOLDER = '/photos/', //图片最后存储的路径
     PHOTOS_TEMP_FOLDER = '/temp/', //图片临时存放的路径
     PHOTOS_ABSOLUTE_FOLDER = "E:\\workspace\\github\\edit_system\\public\\photos\\", //图片最后存储的绝对路径
-    domain = "http://localhost:3000"; //图片所在的服务器
+    domain = "http://localhost:3002"; //图片所在的服务器
 
 
 
 /* GET home page. */
-router.post('/', function(req, res, next) {
+router.post('/', function (req, res, next) {
 
 
 
@@ -24,7 +24,7 @@ router.post('/', function(req, res, next) {
     form.keepExtensions = true; //保留后缀
     form.maxFieldsSize = 2 * 1024 * 1024; //文件大小2M
 
-    form.parse(req, function(err, fields, files) {
+    form.parse(req, function (err, fields, files) {
 
         if (err) {
             res.locals.error = err;
@@ -68,9 +68,10 @@ router.post('/', function(req, res, next) {
         //相对项目根目录的用户照片文件夹路径，fs.renameSync使用相对根目录的路径
         // let userName = 'liuqin';
 
-        let month = new Date().getMonth() + 1 < 10 ? '0' + (new Date().getMonth() + 1) : new Date().getMonth() + 1;
-        let date = new Date().getDate() +1 <10 ? '0' + (new Date().getDate()) : new Date().getDate();
-        let today = String(new Date().getFullYear()) + month + date;
+        let fulldate = new Date();
+        let month = fulldate.getMonth() + 1 < 10 ? '0' + (fulldate.getMonth() + 1) : fulldate.getMonth() + 1;
+        let date = fulldate.getDate() + 1 < 10 ? '0' + (fulldate.getDate()) : fulldate.getDate();
+        let today = String(fulldate.getFullYear()) + month + date;
 
 
         // let userPhotoPath = PHOTOS_UPLOAD_FOLDER + res.locals.user.userName + '/';
@@ -93,39 +94,50 @@ router.post('/', function(req, res, next) {
 
 
         async.series([ //async.series函数可以控制函数按顺序执行，从而保证最后的函数在所有其他函数完成之后执行
-                function(cb) {
-                    //判断用户的照片文件夹是否存在，不存在就创建一个
-                    fs.exists(userPhotoFolderPath, function(exists) {
-                        if (!exists) {
-                            //console.log('文件夹不存在');
-                            fs.mkdir(userPhotoFolderPath, function(err) {
-                                if (err)
-                                //console.error(err);
-                                //console.log('创建目录成功');
-                                    cb();
-                            });
-                        } else {
-                            //console.log('文件夹存在');
+            function (cb) {
+                //判断用户的照片文件夹是否存在，不存在就创建一个
+                // fs.exists(userPhotoFolderPath, function(exists) {
+                //     if (!exists) {
+                //         //console.log('文件夹不存在');
+                //         fs.mkdir(userPhotoFolderPath, function(err) {
+                //             if (err)
+                //             //console.error(err);
+                //             //console.log('创建目录成功');
+                //                 cb();
+                //         });
+                //     } else {
+                //         //console.log('文件夹存在');
+                //         cb();
+                //     }
+                // });
+
+                fs.readdir(userPhotoFolderPath,(err,file)=>{
+                    if(err){
+                        fs.mkdir(userPhotoFolderPath,(err1)=>{
+                            if(err1){console.log(err1);}
                             cb();
-                        }
-                    });
-                },
-                function(cb) {
-                    //console.log("newPath", newPath);
-                    //fs.renameSync(files.fulAvatar.path, newPath); //重命名暂存在缓存区的图片文件，相当于将其移动到用户照片文件夹下
-                    fs.renameSync(files.file.path, newPath); //重命名暂存在缓存区的图片文件，相当于将其移动到用户照片文件夹下
+                        });
+                    }else{
+                        cb();
+                    }
+                })
+            },
+            function (cb) {
+                //console.log("newPath", newPath);
+                //fs.renameSync(files.fulAvatar.path, newPath); //重命名暂存在缓存区的图片文件，相当于将其移动到用户照片文件夹下
+                fs.renameSync(files.file.path, newPath); //重命名暂存在缓存区的图片文件，相当于将其移动到用户照片文件夹下
 
-                    // photosHandler.addIntoAPhotoTable(userName, photoName, userPhotoPath + photoName);
-                    // res.json({
-                    //      "newPath": showUrl
-                    // });
-                    let imgPath = newPath.slice(6);
-                    res.json({ "link": imgPath });
+                // photosHandler.addIntoAPhotoTable(userName, photoName, userPhotoPath + photoName);
+                // res.json({
+                //      "newPath": showUrl
+                // });
+                let imgPath = newPath.slice(6);
+                res.json({ "link": imgPath });
 
-                    cb();
-                }
-            ],
-            function(error, results) {
+                cb();
+            }
+        ],
+            function (error, results) {
                 if (error) util.log('ERROR ' + error);
             }
         );
