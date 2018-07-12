@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-
+var photosServer=require('../conf/config');
 
 var async = require('async');
 var formidable = require('formidable'),
@@ -9,7 +9,8 @@ var formidable = require('formidable'),
     PHOTOS_UPLOAD_FOLDER = '/photos/', //图片最后存储的路径
     PHOTOS_TEMP_FOLDER = '/temp/', //图片临时存放的路径
     PHOTOS_ABSOLUTE_FOLDER = "E:\\workspace\\github\\edit_system\\public\\photos\\", //图片最后存储的绝对路径
-    domain = "http://localhost:3002"; //图片所在的服务器
+    // domain = "http://localhost:3002"; //图片所在的服务器
+    domain=photosServer.photosServer;
 
 
 
