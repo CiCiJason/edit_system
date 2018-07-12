@@ -188,7 +188,7 @@ angular.module('jason.pagination',[]).directive('jasonPagination', [function() {
                     localStorage.removeItem(scope.conf.rememberPerPage);
                 }
             };
-
+    
             scope.$watch(function() {
                 var newValue = scope.conf.currentPage + ' ' + scope.conf.totalItems + ' ';
                 // 如果直接watch perPage变化的时候，因为记住功能的原因，所以一开始可能调用两次。
@@ -209,6 +209,13 @@ angular.module('jason.pagination',[]).directive('jasonPagination', [function() {
 
             }, getPagination);
 
+
+            scope.$watch(function() {
+                var newValue = scope.conf.currentPage + ' ' + scope.conf.itemPerPage;
+                
+                return newValue;
+
+            }, scope.conf.getHttp);
         }
     };
 }]);

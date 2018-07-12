@@ -87,7 +87,7 @@ router.post('/', function (req, res, next) {
 
 
         //显示地址；
-        let showUrl = domain + userPhotoPath + photoName;     //     "http://localhost:3000/photos/20180703/111.jpg"
+        let showUrl = domain + userPhotoPath + photoName;     //     "http://localhost:3002/photos/20180703/111.jpg"
         //用户照片文件夹的绝对路径，因为fs.mkdir创建文件夹必须使用绝对路径
 
         let userPhotoFolderPath = PHOTOS_ABSOLUTE_FOLDER + today;   // "E:\workspace\yangziyun-angularJs\public\photos\20180703"
@@ -131,7 +131,7 @@ router.post('/', function (req, res, next) {
                 // res.json({
                 //      "newPath": showUrl
                 // });
-                let imgPath = newPath.slice(6);
+                let imgPath = domain+newPath.slice(6);
                 res.json({ "link": imgPath });
 
                 cb();

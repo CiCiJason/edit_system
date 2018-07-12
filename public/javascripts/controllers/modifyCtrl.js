@@ -5,11 +5,14 @@ app.controller('modifyCtrl', ['$scope', '$http', function ($scope, $http) {
     //做分页处理
     $scope.paginationConf = {
         currentPage: 1,
-        itemPerPage: 10
+        itemPerPage: 10,
+        getHttp: function () {
+            getDocList({typename: $scope.document.typename }, $scope.paginationConf )
+        }
     };
 
     function getDocList(queryConf, page) {
-        queryConf.draft=false;
+        queryConf.draft = false;
         $http({
             method: 'GET',
             url: '/document/list',
@@ -43,7 +46,7 @@ app.controller('modifyCtrl', ['$scope', '$http', function ($scope, $http) {
     }
 
     function init() {
-        getDocList({typename:$scope.document.typename}, $scope.paginationConf);
+        //getDocList({ typename: $scope.document.typename }, $scope.paginationConf);
         getTypeList();
     }
 
@@ -135,11 +138,11 @@ app.controller('modifyCtrl', ['$scope', '$http', function ($scope, $http) {
 
     //筛选某一类文档
     $scope.changeTypename = function () {
-        getDocList({typename: $scope.document.typename }, $scope.paginationConf );
+        getDocList({ typename: $scope.document.typename }, $scope.paginationConf);
     }
 
-    $scope.$watch("$scope.paginationConf.currentPage+$scope.paginationConf.itemPerPage", getDocList({typename: $scope.document.typename }, $scope.paginationConf ));
-    
+    // $scope.$watch("$scope.paginationConf.currentPage+$scope.paginationConf.itemPerPage", getDocList({typename: $scope.document.typename }, $scope.paginationConf ));
+
 
 
 }]);
