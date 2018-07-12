@@ -40,7 +40,7 @@ angular.module('jason.pagination',[]).directive('jasonPagination', [function() {
                 } else {
                     scope.conf.currentPage = item;
                 }
-                console.log(scope.conf.currentPage)
+                // console.log(scope.conf.currentPage)
             };
 
             // 定义分页的长度必须为奇数 (default:9)
@@ -175,7 +175,7 @@ angular.module('jason.pagination',[]).directive('jasonPagination', [function() {
 
             // 跳转页
             scope.jumpToPage = function() {
-                scope.jumpPageNum = scope.jumpPageNum.replace(/[^0-9]/g, '');
+                scope.jumpPageNum = String(scope.jumpPageNum).replace(/[^0-9]/g, '');
                 if (scope.jumpPageNum !== '') {
                     scope.conf.currentPage = scope.jumpPageNum;
                 }
