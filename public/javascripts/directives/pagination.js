@@ -5,7 +5,7 @@
  * name: jason.pagination
  * Version: 0.0.2
  */
-angular.module('jason.pagination',[]).directive('jasonPagination', [function() {
+angular.module('cici.pagination',[]).directive('ciciPagination', [function() {
     return {
         restrict: 'EA',
         template: '<div class="page-list" style="min-width:300px;letter-spacing: 1px;">' +

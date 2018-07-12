@@ -1,6 +1,9 @@
 app.controller('inputCtrl', ['$scope', '$http', '$window', '$location', function($scope, $http, $window, $location) {
     $scope.document = {};
     $scope.save_tip = '';
+    $scope.inputOptionsImg={
+        toolbarButtons :["image"]
+    };
 
 
     //有？id=xxxx,则初始化的时候，还需要读取该篇文档信息
