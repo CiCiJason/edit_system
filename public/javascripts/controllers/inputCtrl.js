@@ -52,7 +52,9 @@ app.controller('inputCtrl', ['$scope', '$http', '$window', '$location', function
             $scope.tip = "请输入文档标题";
         } else if (!$scope.document.releaseTime) {
             $scope.tip = "请输入文档发布时间";
-        } else if (!$scope.document.content) {
+        } else if (!$scope.document.summary) {
+            $scope.tip = "请输入文档概要";
+        }else if (!$scope.document.content) {
             $scope.tip = "请输入文档正文";
         } else {
             $http({

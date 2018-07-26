@@ -211,7 +211,7 @@ angular.module('cici.pagination',[]).directive('ciciPagination', [function() {
 
 
             scope.$watch(function() {
-                var newValue = scope.conf.currentPage + ' ' + scope.conf.itemPerPage;
+                var newValue = scope.conf.currentPage + ' ' + scope.conf.itemsPerPage;
                 
                 return newValue;
 

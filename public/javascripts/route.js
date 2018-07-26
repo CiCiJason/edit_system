@@ -1,4 +1,4 @@
-var app = angular.module('editSystem', ['ui.router', 'froala','cici.pagination','angularFileUpload'])
+var app = angular.module('editSystem', ['ui.router', 'froala','cici.pagination'])
     .value('froalaConfig', {
         toolbarInline: false,
         placeholderText: '请在这里输入你的文档正文内容'

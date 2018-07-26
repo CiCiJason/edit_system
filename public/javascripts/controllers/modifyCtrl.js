@@ -7,7 +7,7 @@ app.controller('modifyCtrl', ['$scope', '$http', function ($scope, $http) {
         currentPage: 1,
         itemPerPage: 10,
         getHttp: function () {
-            getDocList({typename: $scope.document.typename }, $scope.paginationConf )
+            getDocList({typename: $scope.document.typename }, {currentPage:$scope.paginationConf.currentPage,itemsPerPage:$scope.paginationConf.itemsPerPage} )
         }
     };
 
@@ -17,7 +17,7 @@ app.controller('modifyCtrl', ['$scope', '$http', function ($scope, $http) {
             method: 'GET',
             url: '/document/list',
             params: {
-                queryConf, page
+                queryConf:queryConf,page:page
             }
         }).then(
             function success(data) {
@@ -138,7 +138,10 @@ app.controller('modifyCtrl', ['$scope', '$http', function ($scope, $http) {
 
     //筛选某一类文档
     $scope.changeTypename = function () {
-        getDocList({ typename: $scope.document.typename }, $scope.paginationConf);
+        var obj={};
+        obj.currentPage=$scope.paginationConf.currentPage;
+        obj.itemPerPage=$scope.paginationConf.itemPerPage;
+        getDocList({ typename: $scope.document.typename }, obj);
     }
 
     // $scope.$watch("$scope.paginationConf.currentPage+$scope.paginationConf.itemPerPage", getDocList({typename: $scope.document.typename }, $scope.paginationConf ));
