@@ -6,6 +6,11 @@ app.controller('inputCtrl', ['$scope', '$http', '$window', '$location', function
     };
 
 
+
+    angular.element(".fr-wrapper").children("div").hide();
+    angular.element(".fr-wrapper").children("div.fr-view").show();
+
+
     //有？id=xxxx,则初始化的时候，还需要读取该篇文档信息
 
     //文档类型初始化

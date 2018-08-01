@@ -148,4 +148,75 @@ app.controller('addCtrl', ['$scope', '$http', '$window', '$location', function($
         });
     }
 
+
+//设置管理员
+    $scope.setAdmin = function(id) {
+        $http({
+            method: "PUT",
+            url: '/user/setAdmin',
+            data: {
+                _id: id[0][0]
+            },
+        }).then(function success(data) {
+            $scope.save_tip = data.data.msg;
+            angular.element('.save_tip').modal('show');
+
+            setTimeout(function() {
+                angular.element('.save_tip').modal('hide');
+                setTimeout(function() {
+                    // $window.location.reload();
+                    init();
+                }, 400);
+            }, 1500);
+        }, function error(resp) {
+            //重置失败
+            $scope.save_tip = '重置失败';
+            angular.element('.save_tip').modal('show');
+
+            setTimeout(function() {
+                angular.element('.save_tip').modal('hide');
+                setTimeout(function() {
+                    // $window.location.reload();
+                    init();
+                }, 400);
+            }, 1500);
+        });
+    }
+
+    //取消管理员
+    $scope.cancelAdmin = function(id) {
+        $http({
+            method: "PUT",
+            url: '/user/cancelAdmin',
+            data: {
+                _id: id[0][0]
+            },
+        }).then(function success(data) {
+            $scope.save_tip = data.data.msg;
+            angular.element('.save_tip').modal('show');
+
+            setTimeout(function() {
+                angular.element('.save_tip').modal('hide');
+                setTimeout(function() {
+                    // $window.location.reload();
+                    init();
+                }, 400);
+            }, 1500);
+        }, function error(resp) {
+            //重置失败
+            $scope.save_tip = '重置失败';
+            angular.element('.save_tip').modal('show');
+
+            setTimeout(function() {
+                angular.element('.save_tip').modal('hide');
+                setTimeout(function() {
+                    // $window.location.reload();
+                    init();
+                }, 400);
+            }, 1500);
+        });
+    }
+
+
+
 }]);

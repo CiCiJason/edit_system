@@ -87,6 +87,26 @@ router.put('/resetpwd',function(req,res,next){
 });
 
 
+//设置管理员
+
+router.put('/setAdmin',function(req,res,next){
+    connect_server.connect_server('PUT',req.originalUrl,req.body,function(data){
+        console.log(data);
+        return res.json(data);
+    })
+});
+
+
+//取消管理员
+
+router.put('/cancelAdmin',function(req,res,next){
+    connect_server.connect_server('PUT',req.originalUrl,req.body,function(data){
+        console.log(data);
+        return res.json(data);
+    })
+});
+
+
 //修改密码
 
 router.put('/repassword',function(req,res,next){
