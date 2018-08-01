@@ -126,7 +126,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="(index,x) in types">
+                    <tr ng-repeat="(index,x) in types track by $index">
                         <td>[[index+1]]</td>
                         <td>[[x.typename]]</td>
                         <td>[[x.accountname]]</td>

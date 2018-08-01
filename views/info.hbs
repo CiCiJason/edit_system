@@ -84,14 +84,14 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="(index,x) in documents">
+                    <tr ng-repeat="(index,x) in documents track by $index">
                         <td>[[index+1]]</td>
                         <td>[[x.title]]</td>
                         {{!-- <td>[[x.typename]]</td>
                          --}}
                         <td>
                             <select name="type" id="type" class="" ng-model="x.typename" style="border:none;background-color:transparent;appearance:none;-moz-appearance:none;-webkit-appearance:none;" disabled>
-                                <option value="[[x._id]]" ng-repeat="x in types">[[x.typename]]</option>
+                                <option value="[[x._id]]" ng-repeat="x in types track by $index">[[x.typename]]</option>
                             </select>
                         </td>
                         <td>[[x.releaseTime|date:'yyyy-MM-dd']]</td>
